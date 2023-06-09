@@ -60,7 +60,7 @@ body {
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 3vw;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -128,15 +128,10 @@ body {
   transition: opacity 0.5s ease;
 }
 
-.winner, .again {
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
-}
-
 .winner {
   color: #c38ed5;
   font-size: 4vw;
-  margin-top: 15px;
+  margin-top: 1.5vw;
   margin-bottom: 10px;
 }
 
@@ -149,4 +144,9 @@ body {
 
 .again:hover {
   transform: translateY(-3px);
+}
+
+.winner, .again {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
 }
