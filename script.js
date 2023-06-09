@@ -1,6 +1,15 @@
 function Gameboard() {
+  this.counter = 0;
   this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
+  this.clearBoard = function() {
+    this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
+    const boxes = document.querySelectorAll(".box");
+    boxes.forEach(box => { 
+      box.textContent = "";
+    });
+  }
   this.updateBoard = function(position, marker) {
+    this.counter++;
     if (position === "one") {
       this.board[0][0] = marker;
     }
@@ -27,52 +36,6 @@ function Gameboard() {
     }
     else if (position === "nine") {
       this.board[2][2] = marker;
-    }
-  }
-  this.botMove = function(marker) {
-    for (let i = 0; i < 3; i++)  {
-      for (let j = 0; j < 3; j++) {
-        if (this.board[i][j] === "") {
-          this.board[i][j] = marker;
-          if (i === 0 && j === 0) {
-            const box = document.getElementById("one");
-            box.textContent = marker;
-          }
-          else if (i === 0 && j === 1) {
-            const box = document.getElementById("two");
-            box.textContent = marker;
-          }
-          else if (i === 0 && j === 2) {
-            const box = document.getElementById("three");
-            box.textContent = marker;
-          }
-          else if (i === 1 && j === 0) {
-            const box = document.getElementById("four");
-            box.textContent = marker;
-          }
-          else if (i === 1 && j === 1) {
-            const box = document.getElementById("five");
-            box.textContent = marker;
-          }
-          else if (i === 1 && j === 2) {
-            const box = document.getElementById("six");
-            box.textContent = marker;
-          }
-          else if (i === 2 && j === 0) {
-            const box = document.getElementById("seven");
-            box.textContent = marker;
-          }
-          else if (i === 2 && j === 1) {
-            const box = document.getElementById("eight");
-            box.textContent = marker;
-          }
-          else if (i === 2 && j === 2) {
-            const box = document.getElementById("nine");
-            box.textContent = marker;
-          }
-          return;
-        }
-      }
     }
   }
   this.gameover = function() {
@@ -118,39 +81,52 @@ function Player(name, marker) {
   this.marker = marker;
 }
 
-const winner = document.querySelector("h1");
+let winnerCheck = false;
+let playerCheck = false;
+const winner = document.querySelector(".winner");
+const again = document.querySelector(".again");
 const gameboard = new Gameboard();
-const player = new Player("Player", "X");
-const bot = new Player("Bot", "O");
+const playerone = new Player("Player One", "X");
+const playertwo = new Player("Player Two", "O");
 const boxes = document.querySelectorAll(".box");
+
 boxes.forEach(box => {
   box.addEventListener('click', function () {
-    if (box.textContent === "") {
+    if (box.textContent === "" && winnerCheck === false) {
+      let player;
+      if (playerCheck === false) {
+        player = playerone;
+        playerCheck = true;
+      }
+      else {
+        player = playertwo;
+        playerCheck = false;
+      }
       box.textContent = player.marker;    
       gameboard.updateBoard(box.getAttribute("id"), player.marker);
       let check = gameboard.gameover();
       if (check === null && gameboard.counter === 9) {
-        winner.textContent = "Tie";
+        winnerCheck = true;
+        winner.textContent = "Tied game!";
+        again.textContent = "Play again?";
       }
-      else if (check === player.marker) {
-        winner.textContent = "You won";  
+      else if (check === playerone.marker) {
+        winnerCheck = true;
+        winner.textContent = playerone.name + " wins!";  
+        again.textContent = "Play again?";
       }
-      else if (check === bot.marker) {
-        winner.textContent = "You lost";
-      }
-      else {
-        gameboard.botMove(bot.marker);
-        check = gameboard.gameover();
-        if (check === null && gameboard.counter === 9) {
-          winner.textContent = "Tie";
-        }
-        else if (check === player.marker) {
-          winner.textContent = "You won";  
-        }
-        else if (check === bot.marker) {
-          winner.textContent = "You lost";
-        }  
+      else if (check === playertwo.marker) {
+        winnerCheck = true;
+        winner.textContent = playertwo.name + " wins!";
+        again.textContent = "Play again?";
       }
     }
   });
+});
+
+again.addEventListener('click', function() {
+  gameboard.clearBoard();
+  winner.textContent = "";
+  again.textContent = "";
+  winnerCheck = false;
 });

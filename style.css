@@ -111,3 +111,7 @@ body {
 .container div:hover {
   cursor: pointer;
 }
+
+.again:hover {
+  cursor: pointer;
+}
