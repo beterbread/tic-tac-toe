@@ -2,10 +2,12 @@ function Gameboard() {
   this.counter = 0;
   this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
   this.clearBoard = function() {
+    this.counter = 0;
     this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
     const boxes = document.querySelectorAll(".box");
     boxes.forEach(box => { 
-      box.textContent = "";
+      box.querySelector('span').textContent = ""; 
+      box.querySelector('span').style.opacity = 0; 
     });
   }
   this.updateBoard = function(position, marker) {
@@ -86,23 +88,25 @@ let playerCheck = false;
 const winner = document.querySelector(".winner");
 const again = document.querySelector(".again");
 const gameboard = new Gameboard();
-const playerone = new Player("Player One", "X");
-const playertwo = new Player("Player Two", "O");
+const playerone = new Player("X", "X");
+const playertwo = new Player("O", "O");
 const boxes = document.querySelectorAll(".box");
-
 boxes.forEach(box => {
   box.addEventListener('click', function () {
     if (box.textContent === "" && winnerCheck === false) {
       let player;
       if (playerCheck === false) {
+        box.querySelector('span').style.color = "#9878b7";
         player = playerone;
         playerCheck = true;
       }
       else {
+        box.querySelector('span').style.color = "#b69ccf";
         player = playertwo;
         playerCheck = false;
       }
-      box.textContent = player.marker;    
+      box.querySelector('span').textContent = player.marker;   
+      box.querySelector('span').style.opacity = 1;
       gameboard.updateBoard(box.getAttribute("id"), player.marker);
       let check = gameboard.gameover();
       if (check === null && gameboard.counter === 9) {
@@ -112,12 +116,12 @@ boxes.forEach(box => {
       }
       else if (check === playerone.marker) {
         winnerCheck = true;
-        winner.textContent = playerone.name + " wins!";  
+        winner.textContent = playerone.marker + " wins!";
         again.textContent = "Play again?";
       }
       else if (check === playertwo.marker) {
         winnerCheck = true;
-        winner.textContent = playertwo.name + " wins!";
+        winner.textContent = playertwo.marker + " wins!";
         again.textContent = "Play again?";
       }
     }
@@ -129,4 +133,5 @@ again.addEventListener('click', function() {
   winner.textContent = "";
   again.textContent = "";
   winnerCheck = false;
+  playerCheck = false;
 });

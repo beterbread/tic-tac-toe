@@ -49,18 +49,24 @@ table {
 
 /*Board setup*/
 body {
-  --border: 1px black solid;
-  --length: 50vw;
+  --border: 4px #c38ed5 solid;
+  --length: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9edfd;
+  font-family: 'Averia Libre', cursive;
+  font-family: 'Bagel Fat One', cursive;
 }
 
 .container {
-  border: 2px black solid;
+  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   width: var(--length);
   height: var(--length);
-  background-color: white;
+  background-color: #f9edfd;
 }
 
 .container div {
@@ -70,6 +76,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 1s background-color;
 }
 
 .container div:nth-of-type(1) {
@@ -114,4 +121,25 @@ body {
 
 .again:hover {
   cursor: pointer;
+}
+
+.box > span {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.winner {
+  color: #c38ed5;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.winner span {
+  font-size: 30px;
+}
+
+.again {
+  color: #c38ed5;
+  font-size: 20px;
 }
