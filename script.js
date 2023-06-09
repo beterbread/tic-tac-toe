@@ -7,7 +7,7 @@ function Gameboard() {
     const boxes = document.querySelectorAll(".box");
     boxes.forEach(box => { 
       box.querySelector('span').textContent = ""; 
-      box.querySelector('span').style.opacity = 0; 
+      box.querySelector('span').style.opacity = 0;
     });
   }
   this.updateBoard = function(position, marker) {
@@ -113,16 +113,22 @@ boxes.forEach(box => {
         winnerCheck = true;
         winner.textContent = "Tied game!";
         again.textContent = "Play again?";
+        winner.style.opacity = 1;
+        again.style.opacity = 1;
       }
       else if (check === playerone.marker) {
         winnerCheck = true;
         winner.textContent = playerone.marker + " wins!";
         again.textContent = "Play again?";
+        winner.style.opacity = 1;
+        again.style.opacity = 1;
       }
       else if (check === playertwo.marker) {
         winnerCheck = true;
         winner.textContent = playertwo.marker + " wins!";
         again.textContent = "Play again?";
+        winner.style.opacity = 1;
+        again.style.opacity = 1;
       }
     }
   });
@@ -134,4 +140,6 @@ again.addEventListener('click', function() {
   again.textContent = "";
   winnerCheck = false;
   playerCheck = false;
+  winner.style.opacity = 0;
+  again.style.opacity = 0; 
 });
