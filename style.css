@@ -72,7 +72,7 @@ body {
 .container div {
   width: var(--length) / 3;
   height: var(--length) / 3;
-  font-size: calc(var(--length) / 4);
+  font-size: calc(var(--length) / 3.75);
   display: flex;
   justify-content: center;
   align-items: center;
