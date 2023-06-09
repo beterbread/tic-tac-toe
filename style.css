@@ -1,0 +1,113 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*Board setup*/
+body {
+  --border: 1px black solid;
+  --length: 50vw;
+}
+
+.container {
+  border: 2px black solid;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: var(--length);
+  height: var(--length);
+  background-color: white;
+}
+
+.container div {
+  width: var(--length) / 3;
+  height: var(--length) / 3;
+  font-size: calc(var(--length) / 4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container div:nth-of-type(1) {
+  border-right: var(--border);
+  border-bottom: var(--border);
+}
+
+.container div:nth-of-type(2) {
+  border-bottom: var(--border);
+}
+
+.container div:nth-of-type(3) {
+  border-left: var(--border);
+  border-bottom: var(--border);
+}
+
+.container div:nth-of-type(4) {
+  border-right: var(--border);
+}
+
+.container div:nth-of-type(6) {
+  border-left: var(--border);
+}
+
+.container div:nth-of-type(7) {
+  border-right: var(--border);
+  border-top: var(--border);
+}
+
+.container div:nth-of-type(8) {
+  border-top: var(--border);
+}
+
+.container div:nth-of-type(9) {
+  border-left: var(--border);
+  border-top: var(--border);
+}
+
+.container div:hover {
+  cursor: pointer;
+}
